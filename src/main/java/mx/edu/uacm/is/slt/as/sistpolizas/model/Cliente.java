@@ -69,5 +69,5 @@ public class Cliente {
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
+       
 }
