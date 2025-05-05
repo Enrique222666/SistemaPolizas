@@ -1,0 +1,87 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 40px;
+}
+
+h1 {
+  color: #333;
+}
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.load-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.load-btn:hover {
+  background-color: #218838;
+}
+
+#form-buscar-poliza {
+  margin-bottom: 30px;
+}
+
+#form-buscar-poliza input {
+  padding: 8px;
+  width: 200px;
+}
+
+#resultado-poliza {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#form-agregar-poliza {
+  margin-top: 30px;
+}
+
+#form-agregar-poliza input {
+  margin: 5px;
+  padding: 8px;
+  width: 200px;
+}
+
+#resultado-agregar {
+  margin-top: 15px;
+  font-weight: bold;
+  color: green;
+}
+
+#form-eliminar-poliza {
+  margin-top: 30px;
+}
+
+#form-eliminar-poliza input {
+  margin: 5px;
+  padding: 8px;
+  width: 200px;
+}
+
+#resultado-eliminar {
+  margin-top: 15px;
+  font-weight: bold;
+  color: red;
+}
