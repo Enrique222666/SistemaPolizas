@@ -8,10 +8,12 @@ import java.util.List;
 
 import mx.edu.uacm.is.slt.as.sistpolizas.model.Beneficiario;
 import mx.edu.uacm.is.slt.as.sistpolizas.Simuladores.BaseDeDatosSimulada;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+@CrossOrigin(originPatterns = "*")
 @RestController
 @RequestMapping("/beneficiarios")
 public class BeneficiarioController {
