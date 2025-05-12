@@ -45,6 +45,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependencies>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<dependency>
+				<groupId>org.spring.framework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>3.3.4</version>
+		</dependency>		
 	</dependencies>
 
 	<build>
