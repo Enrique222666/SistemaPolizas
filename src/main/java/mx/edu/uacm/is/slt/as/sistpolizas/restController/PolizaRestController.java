@@ -1,10 +1,12 @@
 package mx.edu.uacm.is.slt.as.sistpolizas.RestController;
 
+import java.text.ParseException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import  java.util.List;
 import java.util.Optional;
+import mx.edu.uacm.is.slt.as.sistpolizas.AuxiliarF.Convertir;
 
 import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
 import mx.edu.uacm.is.slt.as.sistpolizas.service.PolizaService;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @CrossOrigin(originPatterns = "*")
 @RestController
-@RequestMapping("/polizas")
+@RequestMapping("/api/v1")
 public class PolizaRestController {
  
     @Autowired
@@ -27,19 +29,20 @@ public class PolizaRestController {
     public PolizaRestController() {
     }
     
-    @GetMapping
+    @GetMapping("/polizas")
     public List<Poliza> getPolizas(){
        return polizaService.getPolizas();
     }
     
     @GetMapping("/{clave}")
     public Optional<Poliza> getPolizaByClave(@PathVariable String clave){
+            
         return polizaService.getPolizaByClave(clave);
     }
   
      @GetMapping("/t/{tipo}")
-    public List<Poliza> getPolizaByTipo(@PathVariable int tipo){
-        return polizaService.getPolizasByTipo(tipo);
+    public List<Poliza> getPolizaByTipo(@PathVariable String tipo){
+        return polizaService.getPolizasByTipo(Convertir.stringAInt(tipo));
     }
     
       @GetMapping("/c/{curp}")
@@ -66,7 +69,7 @@ public class PolizaRestController {
         }        } 
     
       @GetMapping("/b/{fechaNacimientoBeneficiario}")
-    public List<Poliza> getPolizasByFechaNacimientoBeneficiario(@PathVariable String fechaNacimientoBeneficiario){
+    public List<Poliza> getPolizasByFechaNacimientoBeneficiario(@PathVariable String fechaNacimientoBeneficiario) throws ParseException{
         
         return polizaService.getPolizasByBeneficiariosFechaNacimiento(fechaNacimientoBeneficiario);
     }
@@ -76,6 +79,16 @@ public class PolizaRestController {
         return polizaService.agregarPoliza(poliza);
     }
         
+    @PostMapping("/polizas")
+    public List<Poliza>  agregarPolizas(@RequestBody List<Poliza> polizas){
+        polizaService.agregarPolizas(polizas);
+        return  polizas;
+    }    
+    
+        @DeleteMapping("/polizas")
+    public void eliminarPolizas(){
+        polizaService.eliminarPolizas();  
+    }
     
     @DeleteMapping("/{clave}")
     public void eliminarPolizaByClave(@PathVariable String clave){

@@ -1,23 +1,26 @@
 package mx.edu.uacm.is.slt.as.sistpolizas.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "polizas")
 public class Poliza {
-    
+
     @Id
-    private String clave;         // Clave única de la póliza
-    private int tipo;          // Tipo de seguro: auto, vida o médico
-    private double monto;         // Monto asegurado
-    private String descripcion;   // Descripción del seguro
-    private String curpCliente;      // Cliente asegurado (relación con otra clase)
+    private String clave; 
+
+    private int tipo;
+
+    private double monto;
+
+    private String descripcion;
+
+    private String curpCliente;
 
     public Poliza() {
     }
-    
-    // Constructor
+
     public Poliza(String clave, int tipo, double monto, String descripcion, String curpCliente) {
         this.clave = clave;
         this.tipo = tipo;
@@ -26,18 +29,23 @@ public class Poliza {
         this.curpCliente = curpCliente;
     }
 
-    public boolean compare(Poliza poliza){
-        return this.clave.equals(poliza.clave) && this.tipo == poliza.tipo && this.monto == poliza.monto && this.descripcion.equals(poliza.descripcion) && this.curpCliente.equals(poliza.curpCliente);
+
+    public boolean compare(Poliza poliza) {
+        return Objects.equals(this.clave, poliza.clave)
+            && this.tipo == poliza.tipo
+            && this.monto == poliza.monto
+            && Objects.equals(this.descripcion, poliza.descripcion)
+            && Objects.equals(this.curpCliente, poliza.curpCliente);
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.clave);
-        hash = 89 * hash + this.tipo;
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.monto) ^ (Double.doubleToLongBits(this.monto) >>> 32));
-        hash = 89 * hash + Objects.hashCode(this.descripcion);
-        hash = 89 * hash + Objects.hashCode(this.curpCliente);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.clave);
+        hash = 23 * hash + this.tipo;
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.monto) ^ (Double.doubleToLongBits(this.monto) >>> 32));
+        hash = 23 * hash + Objects.hashCode(this.descripcion);
+        hash = 23 * hash + Objects.hashCode(this.curpCliente);
         return hash;
     }
 
@@ -59,18 +67,15 @@ public class Poliza {
         if (Double.doubleToLongBits(this.monto) != Double.doubleToLongBits(other.monto)) {
             return false;
         }
-        if (!Objects.equals(this.clave, other.clave)) {
-            return false;
-        }
         if (!Objects.equals(this.descripcion, other.descripcion)) {
             return false;
         }
-        return Objects.equals(this.curpCliente, other.curpCliente);
+        if (!Objects.equals(this.curpCliente, other.curpCliente)) {
+            return false;
+        }
+        return Objects.equals(this.clave, other.clave);
     }
 
-    
-    
-    // Getters y Setters
     public String getClave() {
         return clave;
     }
@@ -84,8 +89,7 @@ public class Poliza {
     }
 
     public void setTipo(int tipo) {
-            this.tipo = tipo;
-
+        this.tipo = tipo;
     }
 
     public double getMonto() {
@@ -111,4 +115,6 @@ public class Poliza {
     public void setCurpCliente(String curpCliente) {
         this.curpCliente = curpCliente;
     }
+
+ 
 }

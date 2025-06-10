@@ -1,8 +1,11 @@
 package mx.edu.uacm.is.slt.as.sistpolizas.service;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import mx.edu.uacm.is.slt.as.sistpolizas.AuxiliarF.Convertir;
 import mx.edu.uacm.is.slt.as.sistpolizas.model.Beneficiario;
 import mx.edu.uacm.is.slt.as.sistpolizas.model.Cliente;
 import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
@@ -34,7 +37,7 @@ public class PolizaService {
     }
     
     public List<Poliza> getPolizasByCurp(String curp){
-        return polizaRepository.findByCurp(curp);
+        return polizaRepository.findByCurpCliente(curp);
     }
 
     public List<Poliza> getPolizasByCliente(String nombres, String primerApellido, String segundoApellido) {
@@ -42,7 +45,7 @@ public class PolizaService {
 
         if (clienteOpt.isPresent()) {
             Cliente cliente = clienteOpt.get();
-            return polizaRepository.findByCurp(cliente.getCurp()); // usa el nombre correcto del campo en la entidad
+            return polizaRepository.findByCurpCliente(cliente.getCurp()); // usa el nombre correcto del campo en la entidad
         } else {
             // Cliente no encontrado, puedes lanzar una excepción o devolver una lista vacía
             return new ArrayList<>();
@@ -54,7 +57,7 @@ public class PolizaService {
 
         if (clienteOpt.isPresent()) {
             Cliente cliente = clienteOpt.get();
-            return polizaRepository.findByCurp(cliente.getCurp()); // usa el nombre correcto del campo en la entidad
+            return polizaRepository.findByCurpCliente(cliente.getCurp()); // usa el nombre correcto del campo en la entidad
         } else {
             // Cliente no encontrado, puedes lanzar una excepción o devolver una lista vacía
             return new ArrayList<>();
@@ -66,7 +69,7 @@ public class PolizaService {
         List<Poliza> polizasList = new ArrayList<>();
         if (beneficiariosList.isEmpty()) {
             for(int i = 0; i<polizasList.size(); i++){
-                polizasList.add(polizaRepository.getReferenceById(beneficiariosList.get(i).getId().getPoliza()));
+                polizasList.add(polizaRepository.getReferenceById(beneficiariosList.get(i).getId().getClavePoliza()));
             }
             return polizasList;
         } else {
@@ -80,7 +83,7 @@ public class PolizaService {
         List<Poliza> polizasList = new ArrayList<>();
         if (beneficiariosList.isEmpty()) {
             for(int i = 0; i<polizasList.size(); i++){
-                polizasList.add(polizaRepository.getReferenceById(beneficiariosList.get(i).getId().getPoliza()));
+                polizasList.add(polizaRepository.getReferenceById(beneficiariosList.get(i).getId().getClavePoliza()));
             }
             return polizasList;
         } else {
@@ -89,12 +92,12 @@ public class PolizaService {
         }  
     }
 
-    public List<Poliza> getPolizasByBeneficiariosFechaNacimiento(String fechaNacimiento){
+    public List<Poliza> getPolizasByBeneficiariosFechaNacimiento(String fechaNacimiento) throws ParseException{
         List<Beneficiario> beneficiariosList = beneficiarioService.getBeneficiariosByFechaNacimiento(fechaNacimiento);
         List<Poliza> polizasList = new ArrayList<>();
         if (beneficiariosList.isEmpty()) {
             for(int i = 0; i<polizasList.size(); i++){
-                polizasList.add(polizaRepository.getReferenceById(beneficiariosList.get(i).getId().getPoliza()));
+                polizasList.add(polizaRepository.getReferenceById(beneficiariosList.get(i).getId().getClavePoliza()));
             }
             return polizasList;
         } else {
@@ -107,9 +110,17 @@ public class PolizaService {
         polizaRepository.save(poliza);
         return polizaRepository.findById(poliza.getClave());
     }
+    
+    public void agregarPolizas(List<Poliza> polizas){
+        polizaRepository.saveAll(polizas);
+    }
 
     public  void eliminarPoliza(String clave){
         polizaRepository.deleteById(clave);
     }    
+
+    public void eliminarPolizas() {
+        polizaRepository.deleteAll();
+    }
     
 }
