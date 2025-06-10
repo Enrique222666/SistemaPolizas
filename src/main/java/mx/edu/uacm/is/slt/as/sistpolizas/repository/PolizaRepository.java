@@ -1,7 +1,6 @@
 package mx.edu.uacm.is.slt.as.sistpolizas.repository;
 
 import java.util.List;
-import java.util.Optional;
 import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,6 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface PolizaRepository extends JpaRepository<Poliza, String>{
     
     List<Poliza> findByTipo(int tipo);
-     List<Poliza> findByCurp(String curp);
+     List<Poliza> findByCurpCliente(String curp);
 
 }

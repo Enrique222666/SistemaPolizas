@@ -11,6 +11,15 @@ import org.springframework.stereotype.Service;
 public class ClienteService {
         @Autowired
         ClienteRepository clienteRepository;
+
+    public Optional<Cliente> agregarCliente(Cliente cliente){
+        clienteRepository.save(cliente);
+        return  clienteRepository.findById(cliente.getCurp());        
+    }
+  
+    public List<Cliente> agregarClientes(List<Cliente> clientes){
+        return  clienteRepository.saveAll(clientes);     
+    }    
         
     public List<Cliente> getClientes(){
         return clienteRepository.findAll();
@@ -21,19 +30,21 @@ public class ClienteService {
     }
     
     public Optional<Cliente> getClienteByNombresApellidos(String nombres, String primerApellido, String segundoApellido){
-        return clienteRepository.findByNombresApellidos(nombres, primerApellido, segundoApellido);
+        return clienteRepository.findByNombresAndPrimerApellidoAndSegundoApellido(nombres, primerApellido, segundoApellido);
     }
 
     public Optional<Cliente> getClienteByNombresApellido(String nombres, String primerApellido){
-        return clienteRepository.findByNombresApellido(nombres, primerApellido);
+        return clienteRepository.findByNombresAndPrimerApellido(nombres, primerApellido);
     }
-    
-    public Optional<Cliente> agregarCliente(Cliente cliente){
-        clienteRepository.save(cliente);
-        return  clienteRepository.findById(cliente.getCurp());
         
-    }
-    
-    
+    // Eliminar por Curp
+    public void deleteCliente(String curp) {
+        clienteRepository.deleteById(curp);
+    }    
 
+    // Eliminar por Curp
+    public void deleteClientes() {
+        clienteRepository.deleteAll();
+    }     
+    
 }

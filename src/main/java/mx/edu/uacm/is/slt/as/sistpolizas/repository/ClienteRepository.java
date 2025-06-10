@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, String>{
-    Optional<Cliente> findByNombresApellidos(String nombres, String primerApellido, String segundoApellido);
-    Optional<Cliente> findByNombresApellido(String nombres, String primerApellido);
+    Optional<Cliente> findByNombresAndPrimerApellidoAndSegundoApellido(String nombres, String primerApellido, String segundoApellido);
+    Optional<Cliente> findByNombresAndPrimerApellido(String nombres, String primerApellido);
 
 }
