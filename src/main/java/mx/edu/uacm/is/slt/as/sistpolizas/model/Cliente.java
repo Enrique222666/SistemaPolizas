@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -28,6 +30,15 @@ private OffsetDateTime fechaNacimiento;
     
     public Cliente() {
     }
+    
+    public Cliente(boolean existe) {
+        this.nombres = null;
+        this.primerApellido = null;
+        this.segundoApellido = null;
+        this.direccion = null;
+        this.curp = null;
+        this.fechaNacimiento = null;    
+    }
 
     public Cliente(String nombres, String primerApellido, String segundoApellido, String direccion, String curp, OffsetDateTime fechaNacimiento) {
         this.nombres = nombres;
@@ -41,7 +52,7 @@ private OffsetDateTime fechaNacimiento;
     public Cliente(String nombres, String primerApellido, String direccion, String curp, OffsetDateTime fechaNacimiento) {
         this.nombres = nombres;
         this.primerApellido = primerApellido;
-        this.segundoApellido = "";
+        this.segundoApellido = null;
         this.direccion = direccion;
         this.curp = curp;
         this.fechaNacimiento = fechaNacimiento;

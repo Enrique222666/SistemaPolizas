@@ -1,6 +1,7 @@
 package mx.edu.uacm.is.slt.as.sistpolizas.repository;
 
 import java.util.List;
+import java.util.UUID;
 import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -2,6 +2,7 @@ package mx.edu.uacm.is.slt.as.sistpolizas.model;
 
 import jakarta.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "polizas")
