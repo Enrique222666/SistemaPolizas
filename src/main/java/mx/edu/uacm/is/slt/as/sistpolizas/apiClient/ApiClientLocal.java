@@ -28,6 +28,10 @@ public class ApiClientLocal extends ApiClient{
         clienteHttpClient.eliminarClientes();
     }
     
+        public void eliminarPolizas() throws Exception {
+            polizaHttpClient.eliminarPolizas();
+    }
+    
     public void eliminarCliente(String curp) throws Exception {
         clienteHttpClient.eliminarClientePorCurp(curp);
     }

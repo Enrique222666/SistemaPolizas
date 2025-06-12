@@ -29,12 +29,16 @@ public class PilizaController {
         String clave = form.getFirst("clave");
         ApiClientRemoto remoto = new ApiClientRemoto();
         ApiClientLocal local = new ApiClientLocal();
+                        local.eliminarPolizas();
+        local.eliminarClientes();
         local.setClientes(remoto.getClientes());
+
+
         local.setPolizas(remoto.getPolizas());
         Poliza poliza = local.getByClave(clave);
 
         if (poliza == null) {
-            if (remoto.getBYCurp(clave) == null) {
+            if (remoto.getByClave(clave) == null) {
 
                 poliza = new Poliza();
             }else{
@@ -43,7 +47,7 @@ public class PilizaController {
         }
 
         model.addAttribute("poliza", poliza);
-        return "clientebycurp";
+        return "polizabyclave";
     }
     
 }

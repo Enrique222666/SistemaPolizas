@@ -111,6 +111,19 @@ public Poliza agregarPoliza(Poliza poliza) throws Exception {
             System.out.println("Error al obtener cliente: " + respuesta.statusCode());
             return null;
         }
+    }
+
+    public void eliminarPolizas() throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(rutaBase + "/polizas"))
+                .DELETE()
+                .build();
+
+        HttpResponse<Void> respuesta = httpClient.send(request, HttpResponse.BodyHandlers.discarding());
+
+        if (respuesta.statusCode() != 200 && respuesta.statusCode() != 204) {
+            System.out.println("Error al eliminar todos los polizas: " + respuesta.statusCode());
+        }
     }    
     
 }
