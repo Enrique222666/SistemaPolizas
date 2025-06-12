@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Poliza {
 
     @Id
-    private String clave; 
+    private String clave;
 
     private int tipo;
 
@@ -30,13 +30,20 @@ public class Poliza {
         this.curpCliente = curpCliente;
     }
 
+    public Poliza(boolean existe) {
+        this.clave = null;
+        this.tipo = 0;
+        this.monto = 0;
+        this.descripcion = null;
+        this.curpCliente = null;
+    }
 
     public boolean compare(Poliza poliza) {
         return Objects.equals(this.clave, poliza.clave)
-            && this.tipo == poliza.tipo
-            && this.monto == poliza.monto
-            && Objects.equals(this.descripcion, poliza.descripcion)
-            && Objects.equals(this.curpCliente, poliza.curpCliente);
+                && this.tipo == poliza.tipo
+                && this.monto == poliza.monto
+                && Objects.equals(this.descripcion, poliza.descripcion)
+                && Objects.equals(this.curpCliente, poliza.curpCliente);
     }
 
     @Override
@@ -117,5 +124,4 @@ public class Poliza {
         this.curpCliente = curpCliente;
     }
 
- 
 }
